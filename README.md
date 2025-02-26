@@ -18,6 +18,7 @@ The Docker build and push can be configured via the following options:
 | Option           | Description                                                                     | Default Value                            |
 |------------------|---------------------------------------------------------------------------------|------------------------------------------|
 | `dockerFilePath` | Path to the Dockerfile used for building the image                              | `""` (defaults to the `rootProject` dir) |
+| `registry`       | Docker registry where the image will be pushed                                  | `"hub.docker.com"` (optional)            |
 | `repository`     | Docker repository where the image will be pushed                                | `""` (required)                          |
 | `platforms`      | List of platforms for multiplatform builds (e.g., `linux/amd64`, `linux/arm64`) | `["linux/amd64"]`                        |
 | `buildArgs`      | Map of build arguments to be passed to the Docker build command                 | `{}` (empty map)                         |
@@ -34,7 +35,7 @@ Docker tasks
 ------------
 dockerBuild  - Builds the Docker image(s) defined in the configuration. Supports multiplatform builds and custom build arguments.
 dockerLogin  - Logs into the Docker registry using the provided username and password from the environment or configuration.
-dockerPush   - Pushes the built Docker image(s) to the specified repository, applying any specified tags and the `latest` tag if enabled.
+dockerPush   - Pushes the built Docker image(s) to the specified registry/repository, applying any specified tags and the `latest` tag if enabled.
 
 ```
 
@@ -63,4 +64,4 @@ Docker authentication can be managed via environment variables:
 - `DOCKER_USERNAME`: Your Docker username
 - `DOCKER_PASSWORD`: Your Docker password
 
-These credentials are automatically picked up by the plugin when pushing images to a repository.
+These credentials are automatically picked up by the plugin when pushing images to a registry/repository.

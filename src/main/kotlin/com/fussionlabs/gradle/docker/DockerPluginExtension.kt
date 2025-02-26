@@ -2,6 +2,7 @@ package com.fussionlabs.gradle.docker
 
 open class DockerPluginExtension {
     var dockerFilePath = ""
+    var registry = ""
     var repository: String = ""
     var platforms = mutableListOf("linux/amd64")
     var buildArgs = mutableMapOf<String, String>()

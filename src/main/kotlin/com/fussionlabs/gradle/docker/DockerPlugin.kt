@@ -37,7 +37,7 @@ class DockerPlugin: Plugin<Project> {
             task.dependsOn(DOCKER_LOGIN_TASK)
             task.pushImage = true
             task.group = DOCKER_PLUGIN_GROUP
-            task.description = "Pushes the built Docker image(s) to the specified repository, applying any specified tags and the `latest` tag if enabled"
+            task.description = "Pushes the built Docker image(s) to the specified registry/repository, applying any specified tags and the `latest` tag if enabled"
 
             if (project.dockerExt.requireBuild) {
                 task.dependsOn("build")
@@ -59,6 +59,10 @@ class DockerPlugin: Plugin<Project> {
         if (extension.dockerFilePath.isEmpty()) {
             logger.warn("No Dockerfile path set, defaulting to project directory: ${project.rootDir.absolutePath}")
             extension.dockerFilePath = project.rootDir.absolutePath
+        }
+
+        if (extension.registry.isEmpty()) {
+            logger.info("No Registry specified, defaulting to Docker Hub ({})", DOCKER_DEFAULT_REGISTRY)
         }
     }
 }

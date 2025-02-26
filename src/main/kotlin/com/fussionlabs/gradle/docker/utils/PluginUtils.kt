@@ -5,6 +5,7 @@ import org.gradle.api.Project
 import org.gradle.api.logging.Logging
 import java.io.File
 import java.util.concurrent.TimeUnit
+import com.fussionlabs.gradle.docker.DOCKER_DEFAULT_REGISTRY
 
 object PluginUtils {
     val logger = Logging.getLogger(PluginUtils::class.java)
@@ -32,7 +33,12 @@ object PluginUtils {
 
     fun getImageTags(dockerExt: DockerPluginExtension): List<String> {
         val imageTags = mutableListOf<String>()
-        val repository = dockerExt.repository
+        val repository = if (dockerExt.registry.isNotEmpty() && dockerExt.registry != DOCKER_DEFAULT_REGISTRY) {
+            "${dockerExt.registry}/${dockerExt.repository}"
+        } else {
+            dockerExt.repository
+        }
+        logger.debug("Using full registry/repository '{}'", repository)
 
         dockerExt.tags.forEach { tag ->
             imageTags.add("$repository:$tag")
