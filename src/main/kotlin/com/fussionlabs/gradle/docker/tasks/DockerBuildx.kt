@@ -38,6 +38,10 @@ open class DockerBuildx: DockerTask() {
             buildCmd.addAll(listOf("--tag", tag))
         }
 
+        if (project.dockerExt.noCache) {
+            buildCmd.add("--no-cache")
+        }
+
         // Set the image build path
         buildCmd.add(project.dockerExt.dockerFilePath)
 
