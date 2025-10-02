@@ -38,9 +38,12 @@ open class DockerBuildx: DockerTask() {
             buildCmd.addAll(listOf("--tag", tag))
         }
 
+        if (project.dockerExt.noCache) {
+            buildCmd.add("--no-cache")
+        }
+
         // Set the image build path
         buildCmd.add(project.dockerExt.dockerFilePath)
-        logger.info("Build Cmd: $buildCmd")
 
         // Load the images (if true)
         if (loadImage) {
@@ -52,6 +55,7 @@ open class DockerBuildx: DockerTask() {
             buildCmd.add("--push")
         }
 
+        logger.info("Build Cmd: $buildCmd")
         dockerTaskArgs = buildCmd
         super.exec()
 

@@ -26,6 +26,7 @@ The Docker build and push can be configured via the following options:
 | `applyLatestTag` | Boolean indicating if the `latest` tag should be automatically applied          | `true`                                   |
 | `username`       | Docker username (can be set via `DOCKER_USERNAME` environment variable)         | `""` (required for pushing images)       |
 | `password`       | Docker password (can be set via `DOCKER_PASSWORD` environment variable)         | `""` (required for pushing images)       |
+| `noCache`        | Disable caching of the Docker buildx extension                                  | `false`                                  |    
 
 
 ## Default Tasks

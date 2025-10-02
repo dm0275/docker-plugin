@@ -9,6 +9,7 @@ open class DockerPluginExtension {
     var tags = mutableListOf<String>()
     var requireBuild = true
     var applyLatestTag = true
+    var noCache = false
 
     var username: String = System.getenv("DOCKER_USERNAME") ?: ""
     var password: String = System.getenv("DOCKER_PASSWORD") ?: ""
